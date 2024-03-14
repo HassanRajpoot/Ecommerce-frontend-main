@@ -155,7 +155,7 @@ const ProductCard = ({
     <img src={photo} alt={name} />
     <Link to={`/product/${productId}`}>{name}</Link>
     <span>
-      ₹{price} X {quantity} = ₹{price * quantity}
+      ${price} X {quantity} = ${price * quantity}
     </span>
   </div>
 );
