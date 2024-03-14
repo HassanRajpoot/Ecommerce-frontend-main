@@ -2,12 +2,18 @@ import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BiArrowBack } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { saveShippingInfo } from "../redux/reducer/cartReducer";
+import { RootState, server } from "../redux/store";
 
 const Shipping = () => {
-  const cartItems = [,12]
-  const total = 1000
+  const { cartItems, total } = useSelector(
+    (state: RootState) => state.cartReducer
+  );
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [shippingInfo, setShippingInfo] = useState({
     address: "",
@@ -25,7 +31,8 @@ const Shipping = () => {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-const server ="dfd"
+
+    dispatch(saveShippingInfo(shippingInfo));
 
     try {
       const { data } = await axios.post(
@@ -96,7 +103,7 @@ const server ="dfd"
           onChange={changeHandler}
         >
           <option value="">Choose Country</option>
-          <option value="india">Pakistan</option>
+          <option value="india">India</option>
         </select>
 
         <input
